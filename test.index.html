@@ -91,6 +91,8 @@
     changeTheColor(text, mainSection);
   }
 
+
+
   let form = document.createElement('form')
   function createForm (text) {
     console.log('formFunc')
@@ -104,17 +106,21 @@
     // input.setAttribute("placeholder", "メールアドレス")
     // label.appendChild(input)
 
-    
-    let test11 = text.indexOf("フォーム")
-    console.log(test11)
-    if ( test11 !== -1 ) {
-      let test2 = text.split('フォーム').join('')
-      console.log('this is test', test2)
-      defineInputName(label, test2);
+    if (text.includes('名前')) {
+      defineInputName(label, 'お名前')
+    } else if (text.includes('メールアドレス')) {
+      defineInputName(label, 'メールアドレス')
     } else {
-      console.log('failed to create')
+      let test11 = text.indexOf("フォーム")
+      console.log(test11)
+      if (test11 !== -1) {
+        let test2 = text.split('フォーム').join('')
+        console.log('this is test', test2)
+        defineInputName(label, test2);
+      } else {
+        console.log('failed to create')
+      }
     }
-
     formBack.appendChild(form)
   }
 
