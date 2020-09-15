@@ -104,13 +104,17 @@
     // input.setAttribute("placeholder", "メールアドレス")
     // label.appendChild(input)
 
-    let test = text.indexOf("フォーム")
-    console.log(test)
-    if ( test !== -1 ) {
-      defineInputName(label, text);
+    
+    let test11 = text.indexOf("フォーム")
+    console.log(test11)
+    if ( test11 !== -1 ) {
+      let test2 = text.split('フォーム').join('')
+      console.log('this is test', test2)
+      defineInputName(label, test2);
     } else {
       console.log('failed to create')
     }
+
     formBack.appendChild(form)
   }
 
