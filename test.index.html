@@ -84,10 +84,27 @@
     let main = document.getElementById('main');
     let mainSection = siteData.makeMain
     mainSection.className = "contents";
-    mainSection.style.cssText = "height: 80%;";
+    mainSection.style.cssText = "height: 95%;";
     main.appendChild(mainSection);
     changeTheColor(text, mainSection);
   }
+
+  let form = document.createElement('form')
+  function createForm (text) {
+    console.log('formFunc')
+    let formBack = siteData.makeMain
+    // let form = document.createElement('form')
+    let label = document.createElement('label')
+    form.appendChild(label)
+
+    let input = document.createElement('input')
+    input.setAttribute("type", "text");
+    input.setAttribute("placeholder", "メールアドレス")
+    label.appendChild(input)
+
+    formBack.appendChild(form)
+  }
+
 
   SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
   const recognition = new SpeechRecognition();
@@ -99,20 +116,16 @@
     console.log('1, from recognition', uttr.text)
     usersWords = uttr.text
 
-    // const body = document.querySelector('body');
-    // const firstWords = document.querySelector('#firstDiscription')
-    // body.remove(firstWords);
-
-    // const btns = document.querySelector('.btns');
-    // btns.style.cssText = "opacity: 0.5;"
-
     if (usersWords.includes('ヘッダー')) {
       createHeader(usersWords);
     } else if (usersWords.includes('メイン')) {
       createMain(usersWords)
     } else if (usersWords.includes('テスト')) {
       test(usersWords)
-    }　else {
+    } else if (usersWords.includes('フォーム')) {
+      // test(usersWords)
+      createForm(usersWords)
+    } else {
       console.log('miss the recognize')
     }
     // recognition.onend = reset;
