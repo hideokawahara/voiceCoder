@@ -79,9 +79,11 @@
     // const btns = document.querySelector('.btns');
     // btns.style.cssText = "opacity: 0.5;"
   }
+  
+  let main = document.getElementById('main');
 
   function createMain (text) {
-    let main = document.getElementById('main');
+    // let main = document.getElementById('main');
     let mainSection = siteData.makeMain
     mainSection.className = "contents";
     mainSection.style.cssText = "height: 95%;";
@@ -97,12 +99,26 @@
     let label = document.createElement('label')
     form.appendChild(label)
 
+    // let input = document.createElement('input')
+    // input.setAttribute("type", "text");
+    // input.setAttribute("placeholder", "メールアドレス")
+    // label.appendChild(input)
+
+    let test = text.indexOf("フォーム")
+    console.log(test)
+    if ( test !== -1 ) {
+      defineInputName(label, text);
+    } else {
+      console.log('failed to create')
+    }
+    formBack.appendChild(form)
+  }
+
+  function defineInputName (givenLabel, theWords) {
     let input = document.createElement('input')
     input.setAttribute("type", "text");
-    input.setAttribute("placeholder", "メールアドレス")
-    label.appendChild(input)
-
-    formBack.appendChild(form)
+    input.setAttribute("placeholder", `${theWords}`)
+    givenLabel.appendChild(input)
   }
 
 
@@ -124,7 +140,12 @@
       test(usersWords)
     } else if (usersWords.includes('フォーム')) {
       // test(usersWords)
-      createForm(usersWords)
+      // if ( !createMain(usersWords) ) {
+      //   console.log('this is false')
+      // } else {
+      //   createForm(usersWords)
+      // }
+      createForm(usersWords);
     } else {
       console.log('miss the recognize')
     }
