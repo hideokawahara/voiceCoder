@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="sub-body">
+    <!-- <h1 id="firstDiscription">Just say to this.</h1> -->
+    <div id="header">
+    </div>
+    <div id="main">
+    </div>
+    <div class="test">
+    </div>
+    <div class="btns">
+      <button id="start-btn">start</button>
+      <button id="stop-btn">stop</button>
+    </div>
+  </div>
+</body>
+
+<script>
+  const startBtn = document.querySelector('#start-btn');
+  const stopBtn = document.querySelector('#stop-btn');
+
+  startBtn.onclick = () => {
+    recognition.start();
+  }
+  stopBtn.onclick = () => {
+    recognition.stop();
+  }
+
+
+  let makeHeader = document.createElement('header');
+  let makeSomething = document.createElement('section')
+  let makeMain = document.createElement('section');
+
+// traial
+  var siteData = {
+    makeHeader,
+    makeMain,
+    makeSomething
+  };
+
+
+  function test (text) { 
+    let makeObject = document.querySelector('.test');
+    console.log(makeObject)
+    siteData.makeSomething.style.cssText = "height: 100px;";
+    let ababab = siteData.makeSomething
+    makeObject.appendChild(ababab)
+    changeTheColor(text, ababab);
+  }
+
+  function changeTheColor (theWords, changingThing) {
+    if (theWords.includes('青')) {
+      changingThing.style.backgroundColor = "#75a0d2";
+    } else if (theWords.includes('赤')) {
+      changingThing.style.backgroundColor = "#da4a4a";
+    } else if (theWords.includes('緑')) {
+      changingThing.style.backgroundColor = "#75d27d";
+    } else {
+      console.log('from second else')
+      changingThing.style.backgroundColor = "#EBECF0";
+    }
+  }
+// by here
+
+  function createHeader (text) {
+    let mainHeader = document.getElementById('header');
+    console.log('from the header');
+    let header = siteData.makeHeader
+    header.className = "madeHeader";
+    header.style.cssText = "height: 100px;";
+    mainHeader.appendChild(header);
+    changeTheColor(text, header);
+    // const btns = document.querySelector('.btns');
+    // btns.style.cssText = "opacity: 0.5;"
+  }
+
+  function createMain (text) {
+    let main = document.getElementById('main');
+    let mainSection = siteData.makeMain
+    mainSection.className = "contents";
+    mainSection.style.cssText = "height: 80%;";
+    main.appendChild(mainSection);
+    changeTheColor(text, mainSection);
+  }
+
+  SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
+  const recognition = new SpeechRecognition();
+  recognition.continuous = true;
+
+  recognition.onresult = (event) => {
+    // 改造
+    const uttr = new SpeechSynthesisUtterance(event.results[0][0].transcript)
+    console.log('1, from recognition', uttr.text)
+    usersWords = uttr.text
+
+    // const body = document.querySelector('body');
+    // const firstWords = document.querySelector('#firstDiscription')
+    // body.remove(firstWords);
+
+    // const btns = document.querySelector('.btns');
+    // btns.style.cssText = "opacity: 0.5;"
+
+    if (usersWords.includes('ヘッダー')) {
+      createHeader(usersWords);
+    } else if (usersWords.includes('メイン')) {
+      createMain(usersWords)
+    } else if (usersWords.includes('テスト')) {
+      test(usersWords)
+    }　else {
+      console.log('miss the recognize')
+    }
+    // recognition.onend = reset;
+    // recognition.start();
+  }
+
+  // recognition.start();
+  
+</script>
+</html>
