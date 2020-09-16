@@ -48,7 +48,7 @@ NoCodeの声で作成するものをイメージしました。
 
 `$ git clone https://github.com/hideokawahara/voiceCoder.git`  
 
-`$ cd voceCoder`
+`$ cd voiceCoder`
 
 
 # Note
