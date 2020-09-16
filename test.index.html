@@ -89,7 +89,6 @@
   let main = document.getElementById('main');
 
   function createMain (text) {
-    // let main = document.getElementById('main');
     let mainSection = siteData.makeMain
     mainSection.className = "contents";
     mainSection.style.cssText = "height: 95%;";
@@ -106,11 +105,8 @@
   function createForm (text) {
     console.log('formFunc')
     let formBack = siteData.makeMain
-    // let form = document.createElement('form')
     let label = document.createElement('label')
-    
-    // form.appendChild(label)
-
+  
     if (text.includes('名前')) {
       form.appendChild(labelForName)
       defineInputName(labelForName, 'お名前', text)
@@ -136,30 +132,24 @@
     if (theWords === 'お名前') {
       console.log('nameprop')
       let input = siteData.makeInputName
-      input.setAttribute("type", "text");
-      input.setAttribute("placeholder", `${theWords}`)
-      givenLabel.appendChild(input);
+      actualPuttingInputType(input, givenLabel, theWords);
       changeTheColor(colorWords, input);
     } else if (theWords === 'メールアドレス') {
       console.log('mailprops')
       let input = siteData.makeInputMail
-      input.setAttribute("type", "text");
-      input.setAttribute("placeholder", `${theWords}`)
-      givenLabel.appendChild(input);
+      actualPuttingInputType(input, givenLabel, theWords);
       changeTheColor(colorWords, input);
     } else {
       let input = document.createElement('input')
-      input.setAttribute("type", "text");
-      input.setAttribute("placeholder", `${theWords}`)
-      givenLabel.appendChild(input);
+      actualPuttingInputType(input, givenLabel, theWords);
       changeTheColor(colorWords, input);
     }
-    // let input = siteData.makeInput
-    // // let input = document.createElement('input')
-    // input.setAttribute("type", "text");
-    // input.setAttribute("placeholder", `${theWords}`)
-    // givenLabel.appendChild(input);
-    // changeTheColor(colorWords, input);
+  }
+
+  function actualPuttingInputType (inputType, givenLabel, defineWords) {
+    inputType.setAttribute("type", "text");
+    inputType.setAttribute("placeholder", `${defineWords}`)
+    givenLabel.appendChild(inputType);
   }
 
 
@@ -180,12 +170,6 @@
     } else if (usersWords.includes('テスト')) {
       test(usersWords)
     } else if (usersWords.includes('フォーム')) {
-      // test(usersWords)
-      // if ( !createMain(usersWords) ) {
-      //   console.log('this is false')
-      // } else {
-      //   createForm(usersWords)
-      // }
       createForm(usersWords);
     } else {
       console.log('miss the recognize')
