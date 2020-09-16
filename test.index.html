@@ -15,8 +15,8 @@
     <div class="test">
     </div>
     <div class="btns">
-      <button id="start-btn">start</button>
-      <button id="stop-btn">stop</button>
+      <button class="controlBtn" id="start-btn">start</button>
+      <button class="controlBtn" id="stop-btn">stop</button>
     </div>
   </div>
 </body>
@@ -36,12 +36,18 @@
   let makeHeader = document.createElement('header');
   let makeSomething = document.createElement('section')
   let makeMain = document.createElement('section');
+  let makeInputName = document.createElement('input')
+  let makeInputMail = document.createElement('input')
+
+
 
 // traial
   var siteData = {
     makeHeader,
     makeMain,
-    makeSomething
+    makeSomething,
+    makeInputName,
+    makeInputMail
   };
 
 
@@ -79,15 +85,81 @@
     // const btns = document.querySelector('.btns');
     // btns.style.cssText = "opacity: 0.5;"
   }
+  
+  let main = document.getElementById('main');
 
   function createMain (text) {
-    let main = document.getElementById('main');
     let mainSection = siteData.makeMain
     mainSection.className = "contents";
-    mainSection.style.cssText = "height: 80%;";
+    mainSection.style.cssText = "height: 95%;";
     main.appendChild(mainSection);
     changeTheColor(text, mainSection);
   }
+
+
+
+  let form = document.createElement('form')
+  let labelForName = document.createElement('label')
+  let labelForMail = document.createElement('label')
+
+  function createForm (text) {
+    console.log('formFunc')
+    let formBack = siteData.makeMain
+    let label = document.createElement('label')
+  
+    if (text.includes('名前')) {
+      form.appendChild(labelForName)
+      defineInputName(labelForName, 'お名前', text)
+    } else if (text.includes('メールアドレス')) {
+      form.appendChild(labelForMail)
+      defineInputName(labelForMail, 'メールアドレス', text)
+    } else {
+      form.appendChild(label)
+      let textIndexNum = text.indexOf("フォーム")
+      console.log(textIndexNum)
+      if (textIndexNum !== -1) {
+        let deleteForm = text.split('フォーム').join('')
+        console.log('this is test', deleteForm)
+        defineInputName(label, deleteForm, text);
+      } else {
+        console.log('failed to create')
+      }
+    }
+    formBack.appendChild(form)
+  }
+
+  function defineInputName (givenLabel, theWords, colorWords) {
+    if (theWords === 'お名前') {
+      let input = siteData.makeInputName
+      actualPuttingInputType(input, givenLabel, theWords);
+      changeTheColor(colorWords, input);
+    } else if (theWords === 'メールアドレス') {
+      let input = siteData.makeInputMail
+      actualPuttingInputType(input, givenLabel, theWords);
+      changeTheColor(colorWords, input);
+    } else {
+      let input = document.createElement('input')
+      actualPuttingInputType(input, givenLabel, theWords);
+      changeTheColor(colorWords, input);
+    }
+  }
+
+  function actualPuttingInputType (inputType, givenLabel, defineWords) {
+    inputType.setAttribute("type", "text");
+    inputType.setAttribute("placeholder", `${defineWords}`)
+    givenLabel.appendChild(inputType);
+  }
+
+  function createBtn (text) {
+    console.log('btnFunc')
+    let formBack = siteData.makeMain
+    let btn = document.createElement('button')
+    btn.textContent = '送信'
+    btn.className = "formBtn"
+    changeTheColor(text, btn)
+    formBack.appendChild(btn)
+  }
+
 
   SpeechRecognition = webkitSpeechRecognition || SpeechRecognition;
   const recognition = new SpeechRecognition();
@@ -99,20 +171,17 @@
     console.log('1, from recognition', uttr.text)
     usersWords = uttr.text
 
-    // const body = document.querySelector('body');
-    // const firstWords = document.querySelector('#firstDiscription')
-    // body.remove(firstWords);
-
-    // const btns = document.querySelector('.btns');
-    // btns.style.cssText = "opacity: 0.5;"
-
     if (usersWords.includes('ヘッダー')) {
       createHeader(usersWords);
     } else if (usersWords.includes('メイン')) {
       createMain(usersWords)
     } else if (usersWords.includes('テスト')) {
       test(usersWords)
-    }　else {
+    } else if (usersWords.includes('フォーム')) {
+      createForm(usersWords);
+    } else if (usersWords.includes('ボタン')) {
+      createBtn(usersWords);
+    }  else {
       console.log('miss the recognize')
     }
     // recognition.onend = reset;
