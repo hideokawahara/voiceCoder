@@ -36,12 +36,18 @@
   let makeHeader = document.createElement('header');
   let makeSomething = document.createElement('section')
   let makeMain = document.createElement('section');
+  let makeInputName = document.createElement('input')
+  let makeInputMail = document.createElement('input')
+
+
 
 // traial
   var siteData = {
     makeHeader,
     makeMain,
-    makeSomething
+    makeSomething,
+    makeInputName,
+    makeInputMail
   };
 
 
@@ -94,29 +100,31 @@
 
 
   let form = document.createElement('form')
+  let labelForName = document.createElement('label')
+  let labelForMail = document.createElement('label')
+
   function createForm (text) {
     console.log('formFunc')
     let formBack = siteData.makeMain
     // let form = document.createElement('form')
     let label = document.createElement('label')
-    form.appendChild(label)
-
-    // let input = document.createElement('input')
-    // input.setAttribute("type", "text");
-    // input.setAttribute("placeholder", "メールアドレス")
-    // label.appendChild(input)
+    
+    // form.appendChild(label)
 
     if (text.includes('名前')) {
-      defineInputName(label, 'お名前')
+      form.appendChild(labelForName)
+      defineInputName(labelForName, 'お名前', text)
     } else if (text.includes('メールアドレス')) {
-      defineInputName(label, 'メールアドレス')
+      form.appendChild(labelForMail)
+      defineInputName(labelForMail, 'メールアドレス', text)
     } else {
-      let test11 = text.indexOf("フォーム")
-      console.log(test11)
-      if (test11 !== -1) {
-        let test2 = text.split('フォーム').join('')
-        console.log('this is test', test2)
-        defineInputName(label, test2);
+      form.appendChild(label)
+      let textIndexNum = text.indexOf("フォーム")
+      console.log(textIndexNum)
+      if (textIndexNum !== -1) {
+        let deleteForm = text.split('フォーム').join('')
+        console.log('this is test', deleteForm)
+        defineInputName(label, deleteForm, text);
       } else {
         console.log('failed to create')
       }
@@ -124,11 +132,34 @@
     formBack.appendChild(form)
   }
 
-  function defineInputName (givenLabel, theWords) {
-    let input = document.createElement('input')
-    input.setAttribute("type", "text");
-    input.setAttribute("placeholder", `${theWords}`)
-    givenLabel.appendChild(input)
+  function defineInputName (givenLabel, theWords, colorWords) {
+    if (theWords === 'お名前') {
+      console.log('nameprop')
+      let input = siteData.makeInputName
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", `${theWords}`)
+      givenLabel.appendChild(input);
+      changeTheColor(colorWords, input);
+    } else if (theWords === 'メールアドレス') {
+      console.log('mailprops')
+      let input = siteData.makeInputMail
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", `${theWords}`)
+      givenLabel.appendChild(input);
+      changeTheColor(colorWords, input);
+    } else {
+      let input = document.createElement('input')
+      input.setAttribute("type", "text");
+      input.setAttribute("placeholder", `${theWords}`)
+      givenLabel.appendChild(input);
+      changeTheColor(colorWords, input);
+    }
+    // let input = siteData.makeInput
+    // // let input = document.createElement('input')
+    // input.setAttribute("type", "text");
+    // input.setAttribute("placeholder", `${theWords}`)
+    // givenLabel.appendChild(input);
+    // changeTheColor(colorWords, input);
   }
 
 
