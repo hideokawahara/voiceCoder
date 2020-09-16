@@ -46,13 +46,10 @@ NoCodeの声で作成するものをイメージしました。
  
 # Usage
 
-`$ git clone https://github.com/hideokawahara/red.git`  
+`$ git clone https://github.com/hideokawahara/voiceCoder.git`  
 
-`$ cd red`
+`$ cd voceCoder`
 
-`$ yarn add`
-
-`$ yarn start`
 
 # Note
  
