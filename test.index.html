@@ -15,8 +15,8 @@
     <div class="test">
     </div>
     <div class="btns">
-      <button id="start-btn">start</button>
-      <button id="stop-btn">stop</button>
+      <button class="controlBtn" id="start-btn">start</button>
+      <button class="controlBtn" id="stop-btn">stop</button>
     </div>
   </div>
 </body>
@@ -130,12 +130,10 @@
 
   function defineInputName (givenLabel, theWords, colorWords) {
     if (theWords === 'お名前') {
-      console.log('nameprop')
       let input = siteData.makeInputName
       actualPuttingInputType(input, givenLabel, theWords);
       changeTheColor(colorWords, input);
     } else if (theWords === 'メールアドレス') {
-      console.log('mailprops')
       let input = siteData.makeInputMail
       actualPuttingInputType(input, givenLabel, theWords);
       changeTheColor(colorWords, input);
@@ -150,6 +148,16 @@
     inputType.setAttribute("type", "text");
     inputType.setAttribute("placeholder", `${defineWords}`)
     givenLabel.appendChild(inputType);
+  }
+
+  function createBtn (text) {
+    console.log('btnFunc')
+    let formBack = siteData.makeMain
+    let btn = document.createElement('button')
+    btn.textContent = '送信'
+    btn.className = "formBtn"
+    changeTheColor(text, btn)
+    formBack.appendChild(btn)
   }
 
 
@@ -171,7 +179,9 @@
       test(usersWords)
     } else if (usersWords.includes('フォーム')) {
       createForm(usersWords);
-    } else {
+    } else if (usersWords.includes('ボタン')) {
+      createBtn(usersWords);
+    }  else {
       console.log('miss the recognize')
     }
     // recognition.onend = reset;
