@@ -19,6 +19,9 @@
       <button class="controlBtn" id="stop-btn">stop</button>
     </div>
   </div>
+  <div id="output" style="height: 100vh; background-color: pink">
+
+  </div>
 </body>
 
 <script>
@@ -56,8 +59,20 @@
     console.log(makeObject)
     siteData.makeSomething.style.cssText = "height: 100px;";
     let ababab = siteData.makeSomething
+    // let contents = document.querySelector('.contents')
     makeObject.appendChild(ababab)
+    // makeObject.appendChild(contents)
     changeTheColor(text, ababab);
+  }
+
+  function output () {
+    let output = document.getElementById('output')
+    let contents = document.querySelector('.contents')
+    let text = contents.outerHTML
+    // let test = document.write(contents)
+    output.innerText = `${text}`
+    console.log(text.style.cssText)
+    // output.appendChild(test)
   }
 
   function changeTheColor (theWords, changingThing) {
