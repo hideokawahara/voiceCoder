@@ -24,9 +24,10 @@
       <div class="popup-close">x</div>
       <div class="popup-content">
         <h2>生成したHTML</h2>
-        <div id="output">
+        <input id="output" readonly>
 
-        </div>
+        </input>
+        <button class="copy">Copy text</button>
       </div>
     </div>
   </div>
@@ -82,7 +83,8 @@
     let contents = document.querySelector('.contents')
     let text = contents.outerHTML
     // let test = document.write(contents)
-    output.innerText = `${text}`
+    // output.innerText = `${text}`
+    output.value = `${text}`
     let style = window.getComputedStyle(contents)
     console.log(style.cssText)
     // output.appendChild(test)
@@ -91,6 +93,26 @@
 
   close.onclick = () => {
     popup.style.display = 'none';
+  }
+
+  function copyToClipboard() {
+    // コピー対象をJavaScript上で変数として定義する
+    let copyTarget = document.getElementById("output");
+
+    // コピー対象のテキストを選択する
+    copyTarget.select();
+
+    // 選択しているテキストをクリップボードにコピーする
+    document.execCommand("Copy");
+
+    // コピーをお知らせする
+    alert("コピーできました！ : " + copyTarget.value);
+  }
+
+  const copy = document.querySelector('.copy');
+
+  copy.onclick = () => {
+    copyToClipboard();
   }
 
 

@@ -179,3 +179,10 @@ input:focus {
     right: 8px;
     cursor: pointer;
 }
+
+.copy {
+  background: orange;
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+}
