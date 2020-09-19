@@ -24,7 +24,11 @@
         <input id="output" readonly>
 
         </input>
-        <button class="copy">Copy text</button>
+        <button class="copy copyBtn">HTMLをコピーする</button>
+        <input id="outputCss" readonly>
+        
+        </input>
+        <button class="copyCss copyBtn">CSSをコピーする</button>
       </div>
     </div>
   </div>
@@ -77,12 +81,12 @@
     let output = document.getElementById('output')
     let contents = document.querySelector('.contents')
     let text = contents.outerHTML
-    // let test = document.write(contents)
-    // output.innerText = `${text}`
     output.value = `${text}`
     let style = window.getComputedStyle(contents)
     console.log(style.cssText)
-    // output.appendChild(test)
+
+    let outputCss = document.getElementById('outputCss')
+    outputCss.value = `${style.cssText}`
     popup.style.display = 'block';
   }
 
@@ -101,6 +105,19 @@
 
   copy.onclick = () => {
     copyToClipboard();
+  }
+
+  function copyCssClip() {
+    let copyObj = document.getElementById("outputCss");
+    copyObj.select(); 
+    document.execCommand("Copy");
+    alert("CSSコピーできました！：" + copyObj.value)
+  }
+
+  const copyCss = document.querySelector('.copyCss');
+
+  copyCss.onclick = () => {
+    copyCssClip();
   }
 
 
