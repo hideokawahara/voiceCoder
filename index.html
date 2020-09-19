@@ -8,8 +8,8 @@
 <body>
   <div class="sub-body">
     <!-- <h1 id="firstDiscription">Just say to this.</h1> -->
-    <div id="header">
-    </div>
+    <!-- <div id="header">
+    </div> -->
     <div id="main">
     </div>
     <div class="test">
@@ -19,8 +19,16 @@
       <button class="controlBtn" id="stop-btn">stop</button>
     </div>
   </div>
-  <div id="output" style="height: 100vh; background-color: pink">
+  <div class="popup-wrapper">
+    <div class="popup">
+      <div class="popup-close">x</div>
+      <div class="popup-content">
+        <h2>生成したHTML</h2>
+        <div id="output">
 
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 
@@ -36,7 +44,7 @@
   }
 
 
-  let makeHeader = document.createElement('header');
+  // let makeHeader = document.createElement('header');
   let makeSomething = document.createElement('section')
   let makeMain = document.createElement('section');
   let makeInputName = document.createElement('input')
@@ -46,7 +54,7 @@
 
 // traial
   var siteData = {
-    makeHeader,
+    // makeHeader,
     makeMain,
     makeSomething,
     makeInputName,
@@ -65,15 +73,26 @@
     changeTheColor(text, ababab);
   }
 
+
+  const popup = document.querySelector('.popup-wrapper');
+  const close = document.querySelector('.popup-close');
+
   function output () {
     let output = document.getElementById('output')
     let contents = document.querySelector('.contents')
     let text = contents.outerHTML
     // let test = document.write(contents)
     output.innerText = `${text}`
-    console.log(text.style.cssText)
+    let style = window.getComputedStyle(contents)
+    console.log(style.cssText)
     // output.appendChild(test)
+    popup.style.display = 'block';
   }
+
+  close.onclick = () => {
+    popup.style.display = 'none';
+  }
+
 
   function changeTheColor (theWords, changingThing) {
     if (theWords.includes('青')) {
@@ -89,17 +108,17 @@
   }
 // by here
 
-  function createHeader (text) {
-    let mainHeader = document.getElementById('header');
-    console.log('from the header');
-    let header = siteData.makeHeader
-    header.className = "madeHeader";
-    header.style.cssText = "height: 100px;";
-    mainHeader.appendChild(header);
-    changeTheColor(text, header);
-    // const btns = document.querySelector('.btns');
-    // btns.style.cssText = "opacity: 0.5;"
-  }
+  // function createHeader (text) {
+  //   let mainHeader = document.getElementById('header');
+  //   console.log('from the header');
+  //   let header = siteData.makeHeader
+  //   header.className = "madeHeader";
+  //   header.style.cssText = "height: 100px;";
+  //   mainHeader.appendChild(header);
+  //   changeTheColor(text, header);
+  //   // const btns = document.querySelector('.btns');
+  //   // btns.style.cssText = "opacity: 0.5;"
+  // }
   
   let main = document.getElementById('main');
 
@@ -186,9 +205,11 @@
     console.log('1, from recognition', uttr.text)
     usersWords = uttr.text
 
-    if (usersWords.includes('ヘッダー')) {
-      createHeader(usersWords);
-    } else if (usersWords.includes('メイン')) {
+    // if (usersWords.includes('ヘッダー')) {
+    //   createHeader(usersWords);
+    // }
+    
+    if (usersWords.includes('メイン')) {
       createMain(usersWords)
     } else if (usersWords.includes('テスト')) {
       test(usersWords)
@@ -196,7 +217,9 @@
       createForm(usersWords);
     } else if (usersWords.includes('ボタン')) {
       createBtn(usersWords);
-    }  else {
+    } else if (usersWords.includes('アウトプット')) {
+      output();
+    } else {
       console.log('miss the recognize')
     }
     // recognition.onend = reset;
