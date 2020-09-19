@@ -7,9 +7,6 @@
 </head>
 <body>
   <div class="sub-body">
-    <!-- <h1 id="firstDiscription">Just say to this.</h1> -->
-    <!-- <div id="header">
-    </div> -->
     <div id="main">
     </div>
     <div class="test">
@@ -45,7 +42,6 @@
   }
 
 
-  // let makeHeader = document.createElement('header');
   let makeSomething = document.createElement('section')
   let makeMain = document.createElement('section');
   let makeInputName = document.createElement('input')
@@ -55,7 +51,6 @@
 
 // traial
   var siteData = {
-    // makeHeader,
     makeMain,
     makeSomething,
     makeInputName,
@@ -96,16 +91,9 @@
   }
 
   function copyToClipboard() {
-    // コピー対象をJavaScript上で変数として定義する
     let copyTarget = document.getElementById("output");
-
-    // コピー対象のテキストを選択する
     copyTarget.select();
-
-    // 選択しているテキストをクリップボードにコピーする
     document.execCommand("Copy");
-
-    // コピーをお知らせする
     alert("コピーできました！ : " + copyTarget.value);
   }
 
@@ -129,18 +117,6 @@
     }
   }
 // by here
-
-  // function createHeader (text) {
-  //   let mainHeader = document.getElementById('header');
-  //   console.log('from the header');
-  //   let header = siteData.makeHeader
-  //   header.className = "madeHeader";
-  //   header.style.cssText = "height: 100px;";
-  //   mainHeader.appendChild(header);
-  //   changeTheColor(text, header);
-  //   // const btns = document.querySelector('.btns');
-  //   // btns.style.cssText = "opacity: 0.5;"
-  // }
   
   let main = document.getElementById('main');
 
@@ -226,10 +202,6 @@
     const uttr = new SpeechSynthesisUtterance(event.results[0][0].transcript)
     console.log('1, from recognition', uttr.text)
     usersWords = uttr.text
-
-    // if (usersWords.includes('ヘッダー')) {
-    //   createHeader(usersWords);
-    // }
     
     if (usersWords.includes('メイン')) {
       createMain(usersWords)
