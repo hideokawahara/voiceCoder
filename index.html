@@ -50,6 +50,7 @@
   let makeMain = document.createElement('section');
   let makeInputName = document.createElement('input')
   let makeInputMail = document.createElement('input')
+  let makeTextArea = document.createElement('textarea')
 
 
 
@@ -58,7 +59,8 @@
     makeMain,
     makeSomething,
     makeInputName,
-    makeInputMail
+    makeInputMail,
+    makeTextArea
   };
 
 
@@ -153,6 +155,7 @@
   let form = document.createElement('form')
   let labelForName = document.createElement('label')
   let labelForMail = document.createElement('label')
+  let labelForTextArea = document.createElement('label')
 
   function createForm (text) {
     console.log('formFunc')
@@ -165,6 +168,9 @@
     } else if (text.includes('メールアドレス')) {
       form.appendChild(labelForMail)
       defineInputName(labelForMail, 'メールアドレス', text)
+    } else if (text.includes('メッセージ')) {
+      form.appendChild(labelForTextArea)
+      defineInputName(labelForTextArea, 'メッセージ', text)
     } else {
       form.appendChild(label)
       let textIndexNum = text.indexOf("フォーム")
@@ -189,6 +195,12 @@
       let input = siteData.makeInputMail
       actualPuttingInputType(input, givenLabel, theWords);
       changeTheColor(colorWords, input);
+    } else if (theWords === 'メッセージ') {
+      let textArea = siteData.makeTextArea
+      textArea.setAttribute("name", "message")
+      textArea.setAttribute("placeholder", `${theWords}`)
+      givenLabel.appendChild(textArea);
+      changeTheColor(colorWords, textArea);
     } else {
       let input = document.createElement('input')
       actualPuttingInputType(input, givenLabel, theWords);
