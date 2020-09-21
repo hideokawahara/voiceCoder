@@ -18,26 +18,8 @@ body {
   line-height: 500px; */
 }
 
-/* #firstDiscription {
-  margin-left: 20%;
-  margin-top: 34%;
-  opacity: 0.3;
-  text-shadow: -1px -2px 3px #808080;
-} */
-
-#header, #main {
+#main {
   text-align: center;
-}
-
-
-.madeHeader {
-  width: 70%;
-  margin: 0 auto;
-  border-radius: 50px;
-  box-shadow: 
-    12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset,
-    -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
-  margin-top: 20px;
 }
 
 .contents {
@@ -67,7 +49,7 @@ label {
   margin-bottom: 24px;
   /* width: 500px; */
 }
-input, .formBtn {
+input, .formBtn, textarea {
   margin-right: 8px;
   box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF;
   /* width: 100%; */
@@ -104,9 +86,9 @@ input:focus {
   background-color: #afd275;
   border-radius: 50px;
   display: flex;
-  height: 10rem;
+  height: 7rem;
   justify-content: space-around;
-  width: 10rem;
+  width: 7rem;
   box-shadow: 
     12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset,
     -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
@@ -137,4 +119,62 @@ input:focus {
 
 .formBtn:active {
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+
+
+
+.popup-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.popup {
+    font-family: Arial;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    margin: 10% auto;
+    padding: 20px;
+    background: white;
+    position: relative;
+}
+
+.popup a {
+    background: orange;
+    color: white;
+    text-decoration: none;
+    padding: 6px 10px;
+}
+
+.popup-close {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.copyBtn {
+  background: orange;
+  color: white;
+  text-decoration: none;
+  padding: 6px 10px;
+}
+
+
+
+@media screen and (min-width:768px) { 
+  input, textarea {
+    width: 30rem;
+    text-align: center;
+  }
+
+  .btns {
+    width: 10rem;
+    height: 10rem;
+  }
 }

@@ -7,9 +7,6 @@
 </head>
 <body>
   <div class="sub-body">
-    <!-- <h1 id="firstDiscription">Just say to this.</h1> -->
-    <div id="header">
-    </div>
     <div id="main">
     </div>
     <div class="test">
@@ -17,6 +14,22 @@
     <div class="btns">
       <button class="controlBtn" id="start-btn">start</button>
       <button class="controlBtn" id="stop-btn">stop</button>
+    </div>
+  </div>
+  <div class="popup-wrapper">
+    <div class="popup">
+      <div class="popup-close">x</div>
+      <div class="popup-content">
+        <h2>生成したフォーム</h2>
+        <input id="output" readonly>
+
+        </input>
+        <button class="copy copyBtn">HTMLをコピーする</button>
+        <input id="outputCss" readonly>
+        
+        </input>
+        <button class="copyCss copyBtn">CSSをコピーする</button>
+      </div>
     </div>
   </div>
 </body>
@@ -33,21 +46,21 @@
   }
 
 
-  let makeHeader = document.createElement('header');
   let makeSomething = document.createElement('section')
   let makeMain = document.createElement('section');
   let makeInputName = document.createElement('input')
   let makeInputMail = document.createElement('input')
+  let makeTextArea = document.createElement('textarea')
 
 
 
 // traial
   var siteData = {
-    makeHeader,
     makeMain,
     makeSomething,
     makeInputName,
-    makeInputMail
+    makeInputMail,
+    makeTextArea
   };
 
 
@@ -56,9 +69,62 @@
     console.log(makeObject)
     siteData.makeSomething.style.cssText = "height: 100px;";
     let ababab = siteData.makeSomething
+    // let contents = document.querySelector('.contents')
     makeObject.appendChild(ababab)
+    // makeObject.appendChild(contents)
     changeTheColor(text, ababab);
   }
+
+
+  const popup = document.querySelector('.popup-wrapper');
+  const close = document.querySelector('.popup-close');
+
+  function output () {
+    let output = document.getElementById('output')
+    let contents = document.querySelector('.contents')
+    let text = contents.outerHTML
+    output.value = `${text}`
+
+    
+    let style = window.getComputedStyle(contents);
+    console.log(style.cssText);
+    console.log(contents)
+
+    let outputCss = document.getElementById('outputCss')
+    outputCss.value = `${style.cssText}`
+    popup.style.display = 'block';
+  }
+
+  close.onclick = () => {
+    popup.style.display = 'none';
+  }
+
+  function copyToClipboard() {
+    let copyTarget = document.getElementById("output");
+    copyTarget.select();
+    document.execCommand("Copy");
+    alert("コピーできました！ : " + copyTarget.value);
+  }
+
+  const copy = document.querySelector('.copy');
+
+  copy.onclick = () => {
+    copyToClipboard();
+  }
+
+  function copyCssClip() {
+    let copyObj = document.getElementById("outputCss");
+    copyObj.select(); 
+    document.execCommand("Copy");
+    alert("CSSコピーできました！：" + copyObj.value)
+  }
+
+  const copyCss = document.querySelector('.copyCss');
+
+  copyCss.onclick = () => {
+    copyCssClip();
+  }
+
 
   function changeTheColor (theWords, changingThing) {
     if (theWords.includes('青')) {
@@ -73,18 +139,6 @@
     }
   }
 // by here
-
-  function createHeader (text) {
-    let mainHeader = document.getElementById('header');
-    console.log('from the header');
-    let header = siteData.makeHeader
-    header.className = "madeHeader";
-    header.style.cssText = "height: 100px;";
-    mainHeader.appendChild(header);
-    changeTheColor(text, header);
-    // const btns = document.querySelector('.btns');
-    // btns.style.cssText = "opacity: 0.5;"
-  }
   
   let main = document.getElementById('main');
 
@@ -101,6 +155,7 @@
   let form = document.createElement('form')
   let labelForName = document.createElement('label')
   let labelForMail = document.createElement('label')
+  let labelForTextArea = document.createElement('label')
 
   function createForm (text) {
     console.log('formFunc')
@@ -113,6 +168,9 @@
     } else if (text.includes('メールアドレス')) {
       form.appendChild(labelForMail)
       defineInputName(labelForMail, 'メールアドレス', text)
+    } else if (text.includes('メッセージ')) {
+      form.appendChild(labelForTextArea)
+      defineInputName(labelForTextArea, 'メッセージ', text)
     } else {
       form.appendChild(label)
       let textIndexNum = text.indexOf("フォーム")
@@ -137,6 +195,12 @@
       let input = siteData.makeInputMail
       actualPuttingInputType(input, givenLabel, theWords);
       changeTheColor(colorWords, input);
+    } else if (theWords === 'メッセージ') {
+      let textArea = siteData.makeTextArea
+      textArea.setAttribute("name", "message")
+      textArea.setAttribute("placeholder", `${theWords}`)
+      givenLabel.appendChild(textArea);
+      changeTheColor(colorWords, textArea);
     } else {
       let input = document.createElement('input')
       actualPuttingInputType(input, givenLabel, theWords);
@@ -170,10 +234,8 @@
     const uttr = new SpeechSynthesisUtterance(event.results[0][0].transcript)
     console.log('1, from recognition', uttr.text)
     usersWords = uttr.text
-
-    if (usersWords.includes('ヘッダー')) {
-      createHeader(usersWords);
-    } else if (usersWords.includes('メイン')) {
+    
+    if (usersWords.includes('メイン')) {
       createMain(usersWords)
     } else if (usersWords.includes('テスト')) {
       test(usersWords)
@@ -181,7 +243,9 @@
       createForm(usersWords);
     } else if (usersWords.includes('ボタン')) {
       createBtn(usersWords);
-    }  else {
+    } else if (usersWords.includes('アウトプット')) {
+      output();
+    } else {
       console.log('miss the recognize')
     }
     // recognition.onend = reset;
