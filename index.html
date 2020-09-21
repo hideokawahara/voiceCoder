@@ -20,7 +20,7 @@
     <div class="popup">
       <div class="popup-close">x</div>
       <div class="popup-content">
-        <h2>生成したHTML</h2>
+        <h2>生成したフォーム</h2>
         <input id="output" readonly>
 
         </input>
@@ -82,8 +82,11 @@
     let contents = document.querySelector('.contents')
     let text = contents.outerHTML
     output.value = `${text}`
-    let style = window.getComputedStyle(contents)
-    console.log(style.cssText)
+
+    
+    let style = window.getComputedStyle(contents);
+    console.log(style.cssText);
+    console.log(contents)
 
     let outputCss = document.getElementById('outputCss')
     outputCss.value = `${style.cssText}`
