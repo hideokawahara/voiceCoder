@@ -2,7 +2,7 @@
 voiceCoderは音声でお問い合わせフォームを作成するアプリケーションです。
 
 # DEMO
-
+[![thumbnail](https://pbs.twimg.com/ext_tw_video_thumb/1308947779046105093/pu/img/iP00otBKw9odxF-C?format=jpg&name=900x900)](https://twitter.com/hinoizuryu27/status/1308947866270883840/video/1)
 デモ動画はTwitterのリンクを載せています。そちらで実際の動作をご確認いただけます。
 
 # Description
